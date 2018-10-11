@@ -1,0 +1,18 @@
+FROM fedora:29
+
+RUN dnf install -y \
+	bison \
+	cmake \
+	flex \
+	git \
+	elfutils-libelf-devel \
+	llvm \
+	llvm-devel \
+	clang \
+	clang-devel \
+	zlib-devel
+
+ENV LLVM_DIR /usr/lib64/llvm
+
+COPY build.sh /build.sh
+ENTRYPOINT ["/bin/sh", "/build.sh"]

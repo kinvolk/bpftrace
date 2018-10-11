@@ -11,5 +11,7 @@ RUN apt-get update && apt-get install -y \
     llvm-5.0-dev \
     zlib1g-dev
 
+ENV LLVM_DIR /usr/lib/llvm-5.0
+
 COPY build.sh /build.sh
 ENTRYPOINT ["bash", "/build.sh"]

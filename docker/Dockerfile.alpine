@@ -1,4 +1,7 @@
-FROM alpine:3.8
+# https://github.com/frol/docker-alpine-glibc
+FROM frolvlad/alpine-glibc
+# FROM alpine:3.8
+
 RUN apk add --update \
   bison \
   build-base \
