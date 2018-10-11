@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
     flex \
     g++ \
     git \
+    clang-5.0 \
     libclang-5.0-dev \
     libelf-dev \
     llvm-5.0-dev \
