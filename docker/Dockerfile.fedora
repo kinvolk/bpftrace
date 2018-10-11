@@ -5,12 +5,17 @@ RUN dnf install -y \
 	cmake \
 	flex \
 	git \
+	elfutils-devel \
 	elfutils-libelf-devel \
+	elfutils-libelf-devel-static \
 	llvm \
 	llvm-devel \
 	clang \
 	clang-devel \
-	zlib-devel
+	zlib-devel \
+	ncurses-devel \
+	ncurses-static \
+	libstdc++-static
 
 ENV LLVM_DIR /usr/lib64/llvm
 

@@ -32,7 +32,7 @@ if (STATIC_LINKING)
       clangSema
       clangSerialization
       clangToolingCore)
-  llvm_map_components_to_libnames(llvm_libs bpfcodegen ipo irreader mcjit orcjit ${LLVM_TARGETS_TO_BUILD})
+  #llvm_map_components_to_libnames(llvm_libs bpfcodegen ipo irreader mcjit orcjit ${LLVM_TARGETS_TO_BUILD})
   target_link_libraries(ast ${clang_libs})
   target_link_libraries(ast ${llvm_libs})
 else()

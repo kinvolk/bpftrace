@@ -1,3 +1,5 @@
+LLVM_DIR=/usr/lib64/llvm cmake -DSTATIC_LINKING:BOOL=ON . && make all
+
 ./build.sh
 sudo cp ./build-release/src/bpftrace /usr/local/bin/
 sudo bpftrace -e 'tracepoint:syscalls:sys_enter_openat /cgroup == 1/ { printf("%s\n", str(args->filename)); }'
