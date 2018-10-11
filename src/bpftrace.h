@@ -65,6 +65,7 @@ public:
   uint64_t resolve_kname(const char *name);
   uint64_t resolve_uname(const char *name, const char *path);
   std::string resolve_name(uint64_t name_id);
+  uint64_t resolve_cgroupid(const char *path);
   std::vector<uint64_t> get_arg_values(std::vector<Field> args, uint8_t* arg_data);
   int pid_;
 

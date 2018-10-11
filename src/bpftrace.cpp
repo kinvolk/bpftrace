@@ -7,6 +7,10 @@
 #include <sys/epoll.h>
 #include <time.h>
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 #include "bcc_syms.h"
 #include "perf_reader.h"
 
@@ -1280,6 +1284,24 @@ uint64_t BPFtrace::resolve_kname(const char *name)
   file.close();
 
   return addr;
+}
+
+uint64_t BPFtrace::resolve_cgroupid(const char *path)
+{
+  uint64_t cgid;
+  int err, mount_id;
+  file_handle *handle = reinterpret_cast<struct file_handle *>(
+    malloc(sizeof(file_handle) + sizeof(uint64_t)));
+
+  handle->handle_bytes = sizeof(uint64_t);
+  err = name_to_handle_at(AT_FDCWD, path, handle, &mount_id, 0);
+  if (err < 0) {
+    free(handle);
+    throw std::runtime_error("name_to_handle_at() failed!");
+  }
+  cgid = *reinterpret_cast<uint64_t *>(handle->f_handle);
+  free(handle);
+  return cgid;
 }
 
 uint64_t BPFtrace::resolve_uname(const char *name, const char *path)

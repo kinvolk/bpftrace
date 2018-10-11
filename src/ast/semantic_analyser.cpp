@@ -254,6 +254,14 @@ void SemanticAnalyser::visit(Call &call)
     }
     call.type = SizedType(Type::integer, 8);
   }
+  else if (call.func == "cgroupid") {
+    if (check_nargs(call, 1)) {
+      if (check_arg(call, Type::string, 0, true)) {
+         ;
+      }
+    }
+    call.type = SizedType(Type::integer, 8);
+  }
   else if (call.func == "printf" || call.func == "system") {
     check_assignment(call, false, false);
     if (check_varargs(call, 1, 7)) {
