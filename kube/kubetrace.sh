@@ -1,4 +1,4 @@
 #!/bin/bash
 
-kubectl --kubeconfig=$HOME/.kube/fiatlux.kubeconfig get pods
+kubectl apply -f bpftrace.yaml
 

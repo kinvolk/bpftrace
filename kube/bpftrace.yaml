@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bpftrace
+spec:
+  containers:
+  - name: bpftrace
+    image: albanc/bpftrace:latest
+    command: ["bpftrace"]
+    args: ['-e', 'tracepoint:syscalls:sys_enter_openat /comm == "kubelet"/ { printf("%s: %s\n", comm, str(args->filename)); }']
+    #args: ['-v', '-e', 'tracepoint:syscalls:sys_enter_openat /cgroup == 0x100000001/ { printf("%s\n", str(args->filename)); }']
+    volumeMounts:
+    - mountPath: /sys/fs/cgroup
+      name: cgroupfs
+    - mountPath: /sys/kernel/debug
+      name: debugfs
+    - mountPath: /lib/modules
+      name: modules
+    securityContext:
+      privileged: true
+  volumes:
+  - name: cgroupfs
+    hostPath:
+      path: /sys/fs/cgroup
+      type: Directory
+  - name: debugfs
+    hostPath:
+      path: /sys/kernel/debug
+      type: Directory
+  - name: modules
+    hostPath:
+      path: /lib/modules
+      type: Directory
