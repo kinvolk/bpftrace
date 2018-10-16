@@ -1,23 +1,19 @@
-FROM fedora:29
+FROM fedora:28
 
 RUN dnf install -y \
 	bison \
 	cmake \
+	make \
 	flex \
 	git \
 	elfutils-devel \
 	elfutils-libelf-devel \
-	elfutils-libelf-devel-static \
-	llvm \
 	llvm-devel \
 	clang \
 	clang-devel \
 	zlib-devel \
 	ncurses-devel \
-	ncurses-static \
-	libstdc++-static
-
-ENV LLVM_DIR /usr/lib64/llvm
+	elfutils-libelf-devel-static
 
 COPY build.sh /build.sh
 ENTRYPOINT ["/bin/sh", "/build.sh"]
